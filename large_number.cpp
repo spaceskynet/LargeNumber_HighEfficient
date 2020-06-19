@@ -379,6 +379,8 @@ large_number nth_root(const large_number& x, const ll& times) // O(nlog^2 n) New
 {
 	if(!((times & 1) || x.is_positive)) 
 		cout << "nan", exit(0);
+	if(x.is_zero() || x == large_number(1))
+		return x;
 	int sup = x.size() - 1;
 	large_number r1 = large_number("1" + string(max((x.size() + times - 1)/ times, 0ull),'0')), r2(0);
 	--r1;
@@ -396,7 +398,7 @@ large_number nth_root(const large_number& x, const ll& times) // O(nlog^2 n) New
 	r1.trim_pre_zero();
 
 	r2 = (r1 * (times - 1) + x.absv() / nth_pow(r1, times - 1)) / times;
-	while (r2 < r1) 
+	while (r2 < r1 && r1 != large_number(1)) 
 	{
 		swap(r1.digits, r2.digits);
 		r2 = (r1 * (times - 1) + x.absv() / nth_pow(r1, times - 1)) / times;
