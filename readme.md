@@ -1,4 +1,7 @@
 A high-precision computing library by C++.
-Include:
+
+# Include:
+
 addition, subtraction, multiply, division, nth_root, power
-**Newton-Raphson**, **FFT** Used
+
+> **Newton-Raphson**, **FFT** Used

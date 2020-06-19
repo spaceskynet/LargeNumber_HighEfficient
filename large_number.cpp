@@ -167,28 +167,28 @@ bool operator<=(const large_number& x, const large_number& y)
 
 large_number& large_number::operator++()
 {
-    *this += large_number(1);
-    return *this;
+	*this += large_number(1);
+	return *this;
 }
 
 large_number large_number::operator++(int)
 {
-    large_number temp = *this;
-    *this += large_number(1);
-    return temp;
+	large_number temp = *this;
+	*this += large_number(1);
+	return temp;
 }
 
 large_number& large_number::operator--()
 {
-    *this -= large_number(1);
-    return *this;
+	*this -= large_number(1);
+	return *this;
 }
 
 large_number large_number::operator--(int)
 {
-    large_number temp = *this;
-    *this -= large_number(1);
-    return temp;
+	large_number temp = *this;
+	*this -= large_number(1);
+	return temp;
 }
 
 //functions for mathematic caculation
@@ -477,7 +477,7 @@ large_number division(const large_number& x, const large_number& y, bool is_get_
 	large_number r = x - y * q;
 	int _x = 0, _y = 0;
 	while (y <= r) ++q, r -= y, ++_x;
-    while (x < y * q) --q, r += y, ++_y;
+	while (x < y * q) --q, r += y, ++_y;
 	
 	std::cerr << "\tCheck quotient_err:" << clock() * 0.1 / CLOCKS_PER_SEC - _fir << " s | +" << _x << " -" << _y << std::endl;
 	
@@ -490,16 +490,16 @@ large_number large_number::move(ll k) const
 	if (k == 0) return *this;
 	large_number ret;
 	if (this->is_zero()) return large_number(0);
-    if (k < 0) 
+	if (k < 0) 
 	{
-        if (-k >= this->size()) return large_number(0);
+		if (-k >= this->size()) return large_number(0);
 		ret.digits.clear();
 		ret.digits.insert(ret.digits.end() ,digits.begin() + (-k), digits.end());
-        return ret;
-    }
-    ret.digits.resize(k, 0);
-    ret.digits.insert(ret.digits.end(), digits.begin(), digits.end());
-    return ret;
+		return ret;
+	}
+	ret.digits.resize(k, 0);
+	ret.digits.insert(ret.digits.end(), digits.begin(), digits.end());
+	return ret;
 }
 
 void Rader(vector<E> &y, int n)
