@@ -381,18 +381,17 @@ large_number nth_root(const large_number& x, const ll& times) // O(nlog^2 n) New
 		cout << "nan", exit(0);
 	if(x.is_zero() || x == large_number(1))
 		return x;
-	int sup = x.size() - 1;
 	large_number r1 = large_number("1" + string(max((x.size() + times - 1)/ times, 0ull),'0')), r2(0);
 	--r1;
 //	if (r1 > x.absv()) r1 = x.absv();
 	ll top = r1.size() - 1;
 	ll L = 0, R = 9;
-	while (L <= R)
+	while (L < R)
 	{
 		ll mid = L + (R - L) / 2;
 		r1.digits[top] = mid;
 		if (nth_pow(r1, times) <= x.absv()) L = mid + 1;
-		else R = mid - 1;
+		else R = mid;
 	}
 	r1.digits[top] = L;
 	r1.trim_pre_zero();
@@ -472,7 +471,7 @@ large_number division(const large_number& x, const large_number& y, bool is_get_
 	large_number y_inv = inv_(y.move(t));
 	large_number q = x.move(t) * y_inv;
 	
-	std::cerr << "\tNewton-Raphson Division quotient:" << clock() * 0.1 / CLOCKS_PER_SEC - _fir << " s" << std::endl;
+	std::cerr << "\tNewton-Raphson Division quotient: " << clock() * 0.1 / CLOCKS_PER_SEC - _fir << " s" << std::endl;
 	_fir = clock() * 0.1 / CLOCKS_PER_SEC;
 	
 	q = q.move(-((n + t) << 1));
@@ -481,7 +480,7 @@ large_number division(const large_number& x, const large_number& y, bool is_get_
 	while (y <= r) ++q, r -= y, ++_x;
 	while (x < y * q) --q, r += y, ++_y;
 	
-	std::cerr << "\tCheck quotient_err:" << clock() * 0.1 / CLOCKS_PER_SEC - _fir << " s | +" << _x << " -" << _y << std::endl;
+	std::cerr << "\tCheck quotient_err: " << clock() * 0.1 / CLOCKS_PER_SEC - _fir << " s | +" << _x << " -" << _y << std::endl;
 	
 	if(is_get_quotient) return q;
 	else return r;
