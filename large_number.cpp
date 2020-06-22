@@ -285,8 +285,8 @@ large_number operator*(const large_number& x, const large_number& y) //FFT O(nlo
 	while(len < (max(xlen, ylen) << 1)) len <<= 1;
 	for(int i = 0 ; i < len; i++)
 	{
-		a.push_back(i < xlen ? E(x[i], 0.0) : (0.0, 0.0));
-		b.push_back(i < ylen ? E(y[i], 0.0) : (0.0, 0.0));
+		a.push_back(i < xlen ? E(x[i], 0.0) : E(0.0, 0.0));
+		b.push_back(i < ylen ? E(y[i], 0.0) : E(0.0, 0.0));
 	}
 	FFT(a, len, 1), FFT(b, len, 1);
 	for(int i = 0; i < len; i++) a[i] *= b[i];
