@@ -466,13 +466,13 @@ large_number division(const large_number& x, const large_number& y, bool is_get_
 	int m = x.digits.size(), n = y.digits.size(), t = 0;
 	if (m < n) return large_number(0);
 	if (m > (n << 1)) t = m - (n << 1);
-	double _fir = clock() * 0.1 / CLOCKS_PER_SEC;
+	double _start = clock() * 0.1 / CLOCKS_PER_SEC;
 	
 	large_number y_inv = inv_(y.move(t));
 	large_number q = x.move(t) * y_inv;
 	
-	std::cerr << "\tNewton-Raphson Division quotient: " << clock() * 0.1 / CLOCKS_PER_SEC - _fir << " s" << std::endl;
-	_fir = clock() * 0.1 / CLOCKS_PER_SEC;
+	std::cerr << "\tNewton-Raphson Division quotient: " << clock() * 0.1 / CLOCKS_PER_SEC - _start << " s" << std::endl;
+	_start = clock() * 0.1 / CLOCKS_PER_SEC;
 	
 	q = q.move(-((n + t) << 1));
 	large_number r = x - y * q;
@@ -480,7 +480,7 @@ large_number division(const large_number& x, const large_number& y, bool is_get_
 	while (y <= r) ++q, r -= y, ++_x;
 	while (x < y * q) --q, r += y, ++_y;
 	
-	std::cerr << "\tCheck quotient_err: " << clock() * 0.1 / CLOCKS_PER_SEC - _fir << " s | +" << _x << " -" << _y << std::endl;
+	std::cerr << "\tCheck quotient_err: " << clock() * 0.1 / CLOCKS_PER_SEC - _start << " s | +" << _x << " -" << _y << std::endl;
 	
 	if(is_get_quotient) return q;
 	else return r;
